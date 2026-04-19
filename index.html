@@ -1,101 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Automated Toggle Text</title>
-<style>
-  .toggle-text { display: none; }
-  .toggle-arrow {
-    cursor: pointer;
-    color: blue;
-    font-weight: bold;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Home</title>
 </head>
 <body>
+  <h1>Welcome</h1>
+  <p>This is my home page.</p>
 
-<!-- RAW TEXT BLOCK WITH FORMATTING BUT NO TOGGLE CODE -->
-<div id="text-block">
-  Most obviously the positioning of Kyle as an action-hero imparts an intrinsically Manichean essence to the dramaturgy; it ineluctably makes the show at least inter alia into a conflict between absolute good and absolute evil, but perhaps more significantly and meritoriously (not that there’s anything intrinsically <b>wrong</b> with Manichean dramaturgy, and in <i>1990</i>’s case there seems to be something intrinsically right about it, given that almost everyone but the top dog at the locus of evil, the PCD, is shown to be partly actuated by noble motives [i.e., such that the show ends up administering a salutary fillip to the received liberal take on the rank and file of “fascist” organizations {i.e., that they attempt to absolve themselves of guilt by pleading that they are “just following orders”; whereas, for example, Delly Lomas knows she is doing evil and only half-attempts to absolve herself on the grounds that she is doing it for the sake of a higher good—viz., the care and upbringing of her daughter}]), it also imparts an aura of <i>vitalism</i> thereto.
-</div>
-
-<!-- JAVASCRIPT TO AUTOMATICALLY APPLY TOGGLES -->
-<script>
-function applyToggles() {
-  const container = document.getElementById("text-block");
-  let html = container.innerHTML;
-
-  const opens = ["(", "[", "{"];
-  const closes = [")", "]", "}"];
-
-  let stack = [];
-  let output = "";
-  let idCounter = 0;
-
-  for (let i = 0; i < html.length; i++) {
-    let ch = html[i];
-
-    // Opening bracket
-    if (opens.includes(ch)) {
-      let id = "toggle-" + (idCounter++);
-      stack.push({ ch, id });
-
-      output += `
-        <span class="toggle-arrow"
-              onclick="toggleText('${id}')"
-              onmouseover="hoverEffect('${id}', true)"
-              onmouseout="hoverEffect('${id}', false)">
-          ${ch}
-        </span>
-        <span id="${id}" class="toggle-text" style="display:none;">
-      `;
-      continue;
-    }
-
-    // Closing bracket
-    if (closes.includes(ch)) {
-      let expected = opens[closes.indexOf(ch)];
-      let top = stack.pop();
-
-      // If mismatched, just output normally
-      if (!top || top.ch !== expected) {
-        output += ch;
-        continue;
-      }
-
-      output += `</span>
-        <span class="toggle-arrow"
-              onclick="toggleText('${top.id}')"
-              onmouseover="hoverEffect('${top.id}', true)"
-              onmouseout="hoverEffect('${top.id}', false)">
-          ${ch}
-        </span>
-      `;
-      continue;
-    }
-
-    // Normal character
-    output += ch;
-  }
-
-  container.innerHTML = output;
-}
-
-function toggleText(id) {
-  const el = document.getElementById(id);
-  el.style.display = (el.style.display === "none") ? "inline" : "none";
-}
-
-function hoverEffect(id, on) {
-  const els = document.querySelectorAll(`[onclick="toggleText('${id}')"]`);
-  els.forEach(el => el.style.color = on ? "orange" : "blue");
-}
-
-window.onload = applyToggles;
-</script>
-
+  <h2>Pages</h2>
+  <ul>
+    <li><a href="page1.html">Page 1</a></li>
+    <li><a href="page2.html">Page 2</a></li>
+    <li><a href="translations.html">Translations</a></li>
+  </ul>
 </body>
 </html>
+
